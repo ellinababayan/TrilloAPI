@@ -25,7 +25,8 @@ SECRET_KEY = "django-insecure-8oe*b_1wbz1ojp&n4k$^u+i%--@m-2k7(&(#t23tfpz8ovln@p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = [".vercel.app"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -87,7 +88,8 @@ TEMPLATES = [
 CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Add your frontend's origin
+    "http://localhost:3000",
+    "https://trillo2.vercel.app",  # Add your frontend's origin
 ]
 
 CORS_ALLOW_METHODS = [
