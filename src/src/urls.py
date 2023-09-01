@@ -14,28 +14,51 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# from django.contrib import admin
+# from django.urls import path, include
+# from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+# from first.views import UserViewSet
+# from rest_framework.routers import DefaultRouter
+
+# # new
+# from first.views import login
+
+# urlpatterns = [
+#     # Other URL patterns...
+#     path("api/token/", login, name="login"),
+# ]
+# # new
+
+# urlpatterns = [
+#     path("admin/", admin.site.urls),
+#     path("api-auth/", include("rest_framework.urls")),
+#     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+#     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+# ]
+
+# router = DefaultRouter()
+# router.register("user", UserViewSet, basename="user")
+# urlpatterns += router.urls
+
+
+
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from first.views import UserViewSet
 from rest_framework.routers import DefaultRouter
 
-# new
+# Import the `login` view from your `first` app's views
 from first.views import login
 
-urlpatterns = [
-    # Other URL patterns...
-    path("api/token/", login, name="login"),
-]
-# new
+router = DefaultRouter()
+router.register("user", UserViewSet, basename="user")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/token/", login, name="login"),  # Include the login path here
+    path("", include(router.urls)),  # Include the router URLs
 ]
-
-router = DefaultRouter()
-router.register("user", UserViewSet, basename="user")
-urlpatterns += router.urls
